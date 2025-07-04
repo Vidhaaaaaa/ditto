@@ -19,17 +19,15 @@ def txt():
     text = pytesseract.image_to_string(img) # image to text now
     return text
 
-i = 0
-while(i<3):
-    timestamp = str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")) # makes a time stamp
-    text = txt()
-    d_timestamp_text = {timestamp: text}
-    ocr_log.update(d_timestamp_text)
+def start_ocr():
+    while True:
+        timestamp = str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")) # makes a time stamp
+        text = txt()
+        d_timestamp_text = {timestamp: text}
+        ocr_log.update(d_timestamp_text)
 
-    print(f"[{timestamp}] Captured text: {text}...")  # Print preview of text
-
-    time.sleep(5)
-    i+=1
+        print(f"[{timestamp}] Captured text: {text}...")  # Print preview of text
+        time.sleep(5) # for 5 seconds
 
 # this function is just so that i can export ocr_log in summarizer.py
 def get_ocr_log():
